@@ -1,0 +1,262 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>Lens</title>
+     <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, can-resize=no">
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <script src="main.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+	<div data-role="page" id="main">
+        <div data-role="header" >
+            <h1 style="font-family: 'Caveat', cursive;font-size:40px;">Lens</h1>
+            <a href="bigliettaggio/login.html" data-icon="user" class="ui-btn-right">Account personale</a>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#main" class="ui-btn-active ui-state-persist"  data-icon="calendar" >Eventi</a></li>
+                    <li><a href="#documents" data-icon="bars">Documenti</a></li>
+                    <li><a href="#feedbacks" data-icon="recycle">Feedback</a></li>
+                    <li><a  href="https://trello.com/b/pRcVr2FN/rappresentanti-di-istituto" target="_blank"   data-icon="check">Progetti</a></li>	
+                    <li><a href="#accounting" data-icon="clock">Contabilit&agrave;</a></li>
+                    <li><a href="#questions" data-icon="edit">Domande &amp; Risposte</a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div>
+        <div data-role="collapsible" id="set1" data-collapsed="true" data-collapsed-icon="carat-d" data-expanded-icon="eye">
+            <h2>Ricerca avanzata</h2>
+            <form data-act="search">
+                
+                <input type="date" name="start" placeholder="Inizio"> 
+                <input type="date" name="end" value="fine" placeholder="Fine">
+                <input type="hidden" name="search" value="events">
+                <input type="submit"  data-icon="eye" value="Cerca">
+            </form>
+            <form onsubmit="location.reload();">
+                <input type="submit" name="clear" value="Resetta" data-icon="delete">
+            </form>
+        </div>
+       <ul data-role="listview" data-inset="true" data-divider-theme="a" id="eventsList" data-filter="true" data-filter-placeholder="Ricerca eventi">
+
+       </ul>
+       <div data-role="footer" >
+        <p>Lens - &copy; 2020, Mattia Mascarello </p>
+        <p>Contenuto rilasciato sotto licenza <a href="https://creativecommons.org/licenses/by/2.0/it/">CC BY 2.0 IT</a></p>
+        <a href="https://lens.stoplight.io/docs/lens/docs/Lens-Api.md">REST API</a>
+        <a href="https://www.innovationplaylist.eu/lens/app/public.gpg.pgpInnovationplaylist.eu.asc"  target="_blank">Chiave pubblica PGP per le firme digitali</a>
+        <a href="https://www.innovationplaylist.eu/lens/app/api/view/all/rss" target="_blank">Feed RSS</a>
+        </div>
+    </div>
+
+    <div data-role="page" id="documents">
+        <div data-role="header" >
+            <h1 style="font-family: 'Caveat', cursive;font-size:40px;">Lens</h1>
+            <a href="bigliettaggio/login.html" data-icon="user" class="ui-btn-right">Account personale</a>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#main" data-icon="calendar" >Eventi</a></li>
+                    <li><a href="#documents" class="ui-btn-active ui-state-persist"  data-icon="bars">Documenti</a></li>
+                    <li><a href="#feedbacks" data-icon="recycle">Feedback</a></li>
+                    <li><a href="https://trello.com/b/pRcVr2FN/rappresentanti-di-istituto" target="_blank"   data-icon="check">Progetti</a></li>	
+                    <li><a href="#accounting" data-icon="clock">Contabilit&agrave;</a></li>
+                    <li><a href="#questions" data-icon="edit">Domande &amp; Risposte</a></li>
+                </ul>
+        </div><!-- /navbar -->
+    </div>
+     <div data-role="collapsible" id="set1" data-collapsed="true" data-collapsed-icon="carat-d" data-expanded-icon="eye">
+        <h2>Ricerca avanzata</h2>
+        <form data-act="search">
+            
+            <input type="date" name="start" placeholder="Inizio"> 
+            <input type="date" name="end" value="fine" placeholder="Fine">
+            <input type="hidden" name="search" value="documents">
+            <input type="submit"  data-icon="eye" value="Cerca">
+        </form>
+        <form onsubmit="location.reload();">
+            <input type="submit" name="clear" value="Resetta" data-icon="delete">
+        </form>
+    </div>
+       <ul data-role="listview" data-inset="true" data-divider-theme="a" id="documentsList" data-filter="true" data-filter-placeholder="Ricerca documenti">
+
+       </ul>
+       <div data-role="footer" >
+        <p>Lens - &copy; 2020, Mattia Mascarello </p>
+        <p>Contenuto rilasciato sotto licenza <a href="https://creativecommons.org/licenses/by/2.0/it/">CC BY 2.0 IT</a></p>
+        <a href="https://lens.stoplight.io/docs/lens/docs/Lens-Api.md">REST API</a>
+        <a href="https://www.innovationplaylist.eu/lens/app/public.gpg.pgpInnovationplaylist.eu.asc"  target="_blank">Chiave pubblica PGP per le firme digitali</a>
+        <a href="https://www.innovationplaylist.eu/lens/app/api/view/all/rss" target="_blank">Feed RSS</a>
+        </div>
+    </div>
+
+    <div data-role="page" id="feedbacks">
+        <div data-role="header" >
+            <h1 style="font-family: 'Caveat', cursive;font-size:40px;">Lens</h1>
+            <a href="bigliettaggio/login.html" data-icon="user" class="ui-btn-right">Account personale</a>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#main" data-icon="calendar" >Eventi</a></li>
+                    <li><a href="#documents"data-icon="bars">Documenti</a></li>
+                    <li><a href="#feedbacks" class="ui-btn-active ui-state-persist"   data-icon="recycle">Feedback</a></li>
+                    <li><a href="https://trello.com/b/pRcVr2FN/rappresentanti-di-istituto" target="_blank"  data-icon="check">Progetti</a></li>	
+                    <li><a href="#accounting" data-icon="clock">Contabilit&agrave;</a></li>
+                    <li><a href="#questions" data-icon="edit">Domande &amp; Risposte</a></li>
+                </ul>
+        </div><!-- /navbar -->
+    </div>
+    <div data-role="collapsible" id="set1" data-collapsed="true" data-collapsed-icon="carat-d" data-expanded-icon="eye">
+        <h2>Ricerca avanzata</h2>
+        <form data-act="search">
+            
+            <input type="date" name="start" placeholder="Inizio"> 
+            <input type="date" name="end" value="fine" placeholder="Fine">
+            <input type="hidden" name="search" value="feedbacks">
+            <input type="submit"  data-icon="eye" value="Cerca">
+        </form>
+        <form onsubmit="location.reload();">
+            <input type="submit" name="clear" value="Resetta" data-icon="delete">
+        </form>
+    </div>
+       <ul data-role="listview" data-inset="true" data-divider-theme="a" id="feedbacksList">
+
+       </ul>
+       <div data-role="footer" >
+        <p>Lens - &copy; 2020, Mattia Mascarello </p>
+        <p>Contenuto rilasciato sotto licenza <a href="https://creativecommons.org/licenses/by/2.0/it/">CC BY 2.0 IT</a></p>
+        <a href="https://lens.stoplight.io/docs/lens/docs/Lens-Api.md">REST API</a>
+        <a href="https://www.innovationplaylist.eu/lens/app/public.gpg.pgpInnovationplaylist.eu.asc" target="_blank">Chiave pubblica PGP per le firme digitali</a>
+        <a href="https://www.innovationplaylist.eu/lens/app/api/view/all/rss" target="_blank">Feed RSS</a>
+        </div>
+    </div>
+
+   <!-- <div data-role="page" id="projects">
+        <div data-role="header" >
+            <h1 style="font-family: 'Caveat', cursive;font-size:40px;">Lens</h1>
+            <a href="bigliettaggio/login.html" data-icon="user" class="ui-btn-right">Account personale</a>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#main" data-icon="calendar" >Eventi</a></li>
+                    <li><a href="#documents"data-icon="bars">Documenti</a></li>
+                    <li><a href="#feedbacks" data-icon="recycle">Feedback</a></li>
+                    <li><a href="#projects" class="ui-btn-active ui-state-persist"  data-icon="check">Progetti</a></li>	
+                    <li><a href="#accounting" data-icon="clock">Contabilit&agrave;</a></li>
+                    <li><a href="#questions" data-icon="edit">Domande &amp; Risposte</a></li>
+                </ul>
+        </div> /navbar 
+    </div>
+        Trello embed
+    https://trello.com/b/pRcVr2FN/rappresentanti-di-istituto
+    -->
+      
+
+    <div data-role="page" id="accounting">
+        <div data-role="header" >
+            <h1 style="font-family: 'Caveat', cursive;font-size:40px;">Lens</h1>
+            <a href="bigliettaggio/login.html" data-icon="user" class="ui-btn-right">Account personale</a>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#main" data-icon="calendar" >Eventi</a></li>
+                    <li><a href="#documents"data-icon="bars">Documenti</a></li>
+                    <li><a href="#feedbacks" data-icon="recycle">Feedback</a></li>
+                    <li><a href="https://trello.com/b/pRcVr2FN/rappresentanti-di-istituto" target="_blank"  data-icon="check">Progetti</a></li>	
+                    <li><a href="#accounting" class="ui-btn-active ui-state-persist" data-icon="clock">Contabilit&agrave;</a></li>
+                    <li><a href="#questions" data-icon="edit">Domande &amp; Risposte</a></li>
+                </ul>
+        </div><!-- /navbar -->
+    </div>
+    <div data-role="collapsible" id="set1" data-collapsed="true" data-collapsed-icon="carat-d" data-expanded-icon="eye">
+        <h2>Ricerca avanzata</h2>
+        <form data-act="search">
+            
+            <input type="date" name="start" placeholder="Inizio"> 
+            <input type="date" name="end" value="fine" placeholder="Fine">
+            <input type="hidden" name="search"  value="accounting">
+            <input type="submit"   data-icon="eye" value="Cerca">
+        </form>
+        <form onsubmit="location.reload();">
+            <input type="submit" name="clear" value="Resetta" data-icon="delete">
+        </form>
+        <div data-role="footer" >
+            <p>Lens - &copy; 2020, Mattia Mascarello </p>
+            <p>Contenuto rilasciato sotto licenza <a href="https://creativecommons.org/licenses/by/2.0/it/">CC BY 2.0 IT</a></p>
+            <a href="https://lens.stoplight.io/docs/lens/docs/Lens-Api.md">REST API</a>
+            <a href="https://www.innovationplaylist.eu/lens/app/public.gpg.pgpInnovationplaylist.eu.asc" target="_blank">Chiave pubblica PGP per le firme digitali</a>
+            <a href="https://www.innovationplaylist.eu/lens/app/api/view/all/rss" target="_blank">Feed RSS</a>
+            </div>
+    </div>
+    <table data-role="table" class="ui-responsive table-stroke">
+             <thead>
+            <tr>
+                <th></th>
+                <th>Titolo</th>
+                <th>Pianificato</th>
+                <th>Eseguito</th>
+                <th>Importo</th>
+                <th>Descrizione breve</th>
+                <th>Data di pubblicazione</th>
+                <th>Tags</th>
+                <th>Dettagli</th>
+            </tr>
+            </thead>
+            <tbody id="accountingList">
+
+            </tbody>
+            </table>
+        <div data-role="footer" >
+            <p>Lens - &copy; 2020, Mattia Mascarello </p>
+            <p>Contenuto rilasciato sotto licenza <a href="https://creativecommons.org/licenses/by/2.0/it/">CC BY 2.0 IT</a></p>
+            <a href="https://lens.stoplight.io/docs/lens/docs/Lens-Api.md">REST API</a>
+            <a href="https://www.innovationplaylist.eu/lens/app/public.gpg.pgpInnovationplaylist.eu.asc" target="_blank">Chiave pubblica PGP per le firme digitali</a>
+            <a href="https://www.innovationplaylist.eu/lens/app/api/view/all/rss" target="_blank">Feed RSS/<a>
+            </div>
+    </div>
+
+    <div data-role="page" id="questions">
+        <div data-role="header" >
+            <h1 style="font-family: 'Caveat', cursive;font-size:40px;">Lens</h1>
+            <a href="bigliettaggio/login.html" data-icon="user" class="ui-btn-right">Account personale</a>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#main" data-icon="calendar" >Eventi</a></li>
+                    <li><a href="#documents"data-icon="bars">Documenti</a></li>
+                    <li><a href="#feedbacks" data-icon="recycle">Feedback</a></li>
+                    <li><a href="https://trello.com/b/pRcVr2FN/rappresentanti-di-istituto" target="_blank"   data-icon="check">Progetti</a></li>	
+                    <li><a href="#accounting"data-icon="clock">Contabilit&agrave;</a></li>
+                    <li><a href="#questions"  class="ui-btn-active ui-state-persist" data-icon="edit">Domande &amp; Risposte</a></li>
+                </ul>
+        </div><!-- /navbar -->
+    </div>
+    <a href="dialog.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Invia Domanda</a>
+    <div data-role="collapsible" id="set1" data-collapsed="true" data-collapsed-icon="carat-d" data-expanded-icon="eye">
+        <h2>Ricerca avanzata</h2>
+        <form data-act="questions">
+            
+            <input type="date" name="start" placeholder="Inizio"> 
+            <input type="date" name="end" value="fine" placeholder="Fine">
+            <input type="hidden" name="search" value="questions">
+            <input type="submit"   data-icon="eye" value="Cerca">
+        </form>
+        <form onsubmit="location.reload();">
+            <input type="submit" name="clear" value="Resetta" data-icon="delete">
+        </form>
+    </div>
+        <ul data-role="listview" data-inset="true" data-divider-theme="a" id="questionsList">
+
+        </ul>
+        <div data-role="footer" >
+            <p>Lens - &copy; 2020, Mattia Mascarello </p>
+            <p>Contenuto rilasciato sotto licenza <a href="https://creativecommons.org/licenses/by/2.0/it/">CC BY 2.0 IT</a></p>
+            <a href="https://lens.stoplight.io/docs/lens/docs/Lens-Api.md">REST API</a>
+            <a href="https://www.innovationplaylist.eu/lens/app/public.gpg.pgpInnovationplaylist.eu.asc" target="_blank">Chiave pubblica PGP per le firme digitali</a>
+            <a href="https://www.innovationplaylist.eu/lens/app/api/view/all/rss" target="_blank">Feed RSS</a>
+        </div>
+    </div>
+
+</body>
+</html>
