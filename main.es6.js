@@ -29,34 +29,36 @@ class NodeLinks{
             }
             ks.forEach(category => {
                     list=dict[category];
-                    this.html+="<div data-role=\"collapsible\"><h3>"+this.lookup[category]+"</h3>";
+                    this.html+="<div><h3>"+this.lookup[category]+"</h3>";
                     list.forEach(obj => {
                         this.html+='<p><button type="button" onclick="location.href=\'api/view/UID/'+obj["UID"]+'/render\';">'+htmlEntities(obj["title"])+'</button></p>';
                     });
                     this.html+="</div>";
                 });
-            if(ks.length>0&&!flag){
+            if(ks.length>0&&flag){
                 this.html+="</div>";
             }
 
         }
         flag=false;
+        list=[];
         dict=this.elLinks["from"]
         if(dict!=null){
             ks=Object.keys(dict);
             if(ks.length>0&&!flag){
-                this.html+='<span>Fanno riferimento a questa risorsa:</span><div data-role="collapsibleset" data-theme="a" data-content-theme="a">';
+                this.html+='<span>Fanno riferimento a questa risorsa:</span><div>';
                 flag=true;
             }
             ks.forEach(category => {
                     list=dict[category];
-                    this.html+="<div data-role=\"collapsible\"><h3>"+this.lookup[category]+"</h3>";
+                    this.html+="<div><h3>"+this.lookup[category]+"</h3>";
                     list.forEach(obj => {
-                        this.html+='<p><button type="button" onclick="location.href=\'api/view/UID/'+obj["UID"]+'/render\';">'+htmlEntities(obj["title"])+'</a></p>';
+// alert(JSON.stringify(obj)); 
+                      this.html+='<p><button type="button" onclick="location.href=\'api/view/UID/'+obj["UID"]+'/render\';">'+htmlEntities(obj["title"])+'</a></p>';
                     });
                     this.html+="</div>";
                 });
-            if(ks.length>0&&!flag){
+            if(ks.length>0&&flag){
                 this.html+="</div>";
             }
         }
@@ -64,6 +66,7 @@ class NodeLinks{
 
 
         this.html+="</div>";
+       // alert(this.html);
         return this.html;
     }
 }
@@ -73,7 +76,7 @@ class Tags{
     }
     computeHTML(){
         if(this.tags!=null&&this.tags.length>0){
-            this.html+="<div data-role=\"collapsible\"><h3>Tag</h3>";
+            this.html+="<div><h3>Tag</h3>";
             this.tags.forEach(element => {
                 this.html+='<p><a href="api/view/tags/'+encodeURI(element)+'/render">'+htmlEntities(element)+'</a></p>';
             });
@@ -356,7 +359,6 @@ class ElementPreviewList{
                         tLihtml+="<td> "+this.textGen(" ",(new TimeFormatter(t["value"])).compute("LLLL") )+"</td>";
 
                         tLihtml+="<td>"+eurS(element["amount"])+"</td>";
-                        tLihtml+="<td> "+this.textGen(" ",t["value"])+"</td>";
 
                         t=this.itLookupPairDict(element,"shortDescription");
                         

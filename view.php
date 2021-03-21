@@ -28,6 +28,12 @@ switch($al[0]){
             if($al[2]=="rss"){
                 $el=adjustFlow($o);
                 include("rssBuilder.php");
+                for($i=0;$i<count($el);$i++){
+             if(!empty($el[$i]["questionTitle"])){
+             	$el[$i]["title"]=$el[$i]["questionTitle"];
+             	$el[$i]["shortDescription"]=$el[$i]["questionTitle"]."\n----\n".$el[$i]["questionText"]."\n````````\n".$el[$i]["answerTitle"]."\n----\n".$el[$i]["answerText"];
+             }
+                }
                 $data=rss($el);
                 ob_clean();
                 header("Content-Type: application/xml");

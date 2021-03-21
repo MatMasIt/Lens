@@ -87,7 +87,7 @@ function humanFileSize($size,$unit="") {
 
 function linkM($link,$text){
     if(empty($link) || empty($text)) return "";
-    return '<a href="'.$link.'">'.htmlentities($text).'</a>';
+    return '<a href="'.$link.'" target="_blank">'.htmlentities($text).'</a>';
 }
 function titlePrn($title,$val,$head="h3"){
     if(empty($title) || empty($val)) return "";
@@ -374,6 +374,16 @@ function pageBuild($title,$body){
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145142703-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-145142703-1');
+	</script>
+
     
     </head>
     
@@ -412,7 +422,7 @@ function renderTag($data,$tag){
         $i=0;
         foreach($data["usage"]["categories"][$k] as $r){
             if(!$r["title"]) continue;
-            $res.='<a href="https://innovationplaylist.eu/lens/app/api/view/UID/'.$r["UID"].'">'.htmlentities($r["title"]).'</a>';
+            $res.='<a href="https://innovationplaylist.eu/lens/app/api/view/UID/'.$r["UID"].'/render">'.htmlentities($r["title"]).'</a>';
             $i++;
         }
         if($i==0) $res.="<i>Dati mancanti</i>";
@@ -424,7 +434,7 @@ function renderTag($data,$tag){
         $res.="<h4>".htmlentities(ITDate(strtotime($k)))."</h4>";
         foreach($data["usage"]["timePoints"][$k] as $r){
             if(!$r["title"]) continue;
-            $res.='<a href="https://innovationplaylist.eu/lens/app/api/view/UID/'.$r["UID"].'">'.htmlentities($r["title"]).'</a>';
+            $res.='<a href="https://innovationplaylist.eu/lens/app/api/view/UID/'.$r["UID"].'/render">'.htmlentities($r["title"]).'</a>';
             $i++; 
         }
         if($i==0) $res.="<i>Dati mancanti</i>";

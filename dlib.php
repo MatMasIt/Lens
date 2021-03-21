@@ -195,7 +195,8 @@ $docs[$i]["UID"]="d".$docs[$i]["ID"];
         for($j=0;$j<count($fbs);$j++){
             if(in_array($docs[$i]["ID"],explode(",",$fbs[$j]["Documenti collegati"]) )) $docs[$i]["links"]["from"]["feedbacks"][]=["title"=>$fbs[$j]["Titolo"],"ID"=>(int)$fbs[$j]["ID"],"UID"=>"f".$fbs[$j]["ID"]];
         }
-        $docs[$i]["tags"]=explode(",",$docs[$i]["Tags"]);
+        $docs[$i]["tags"]=explode(",",trim($docs[$i]["Tags"]));
+        if($docs[$i]["tags"]==[""]) $docs[$i]["tags"]=[];
         unset($docs[$i]["Tags"]);
         if(!empty($docs[$i]["URL Firma Digitale"])){
             $docs[$i]["signatureUrl"]=$docs[$i]["URL Firma Digitale"];
@@ -209,21 +210,21 @@ $docs[$i]["UID"]="d".$docs[$i]["ID"];
 }
 function listCont($pdo,$id=null){
     if(!$id){
-        $q=$pdo->prepare('SELECT * FROM "Contabilita" WHERE DATETIME("NOW") >=  strftime("%s", "Data di pubblicazione") ORDER BY "Data di pubblicazione" DESC');
+        $q=$pdo->prepare('SELECT * FROM "Contabilita" WHERE DATETIME("NOW") >=  strftime("%s", "Data di pubblicazione") ORDER BY "Data di pubblicazione" ASC');
         $q->execute();
         $docs=$q->fetchAll(PDO::FETCH_ASSOC);
     }
     else{
-        $q=$pdo->prepare('SELECT * FROM "Contabilita" WHERE DATETIME("NOW") >=  strftime("%s", "Data di pubblicazione") AND ID=:id ORDER BY "Data di pubblicazione" DESC');
+        $q=$pdo->prepare('SELECT * FROM "Contabilita" WHERE DATETIME("NOW") >=  strftime("%s", "Data di pubblicazione") AND ID=:id ORDER BY "Data di pubblicazione" ASC');
         $q->execute([":id"=>$id]);
         $docs=$q->fetchAll(PDO::FETCH_ASSOC);
     }
     $docs=aritenWrap($docs);
-    $t=$pdo->prepare('SELECT * FROM "Feedbacks" WHERE "Data di pubblicazione" < DATETIME("NOW") ORDER BY "Data di pubblicazione" DESC');
+    $t=$pdo->prepare('SELECT * FROM "Feedbacks" WHERE "Data di pubblicazione" < DATETIME("NOW") ORDER BY "Data di pubblicazione" ASC');
     $t->execute();
     $fbs=$t->fetchAll(PDO::FETCH_ASSOC);
 
-    $t=$pdo->prepare('SELECT * FROM "Domande" WHERE DATETIME("NOW") >=  strftime("%s", "Data di pubblicazione") ORDER BY "Data di pubblicazione" DESC');
+    $t=$pdo->prepare('SELECT * FROM "Domande" WHERE DATETIME("NOW") >=  strftime("%s", "Data di pubblicazione") ORDER BY "Data di pubblicazione" ASC');
     $t->execute();
     $qts=$t->fetchAll(PDO::FETCH_ASSOC);
 
@@ -248,7 +249,8 @@ $docs[$i]["amount"]=(float)$docs[$i]["amount"];
         }
         
         if(count($ta)) $docs[$i]["links"]["to"]["documents"]=$ta;
-        $docs[$i]["tags"]=explode(",",$docs[$i]["Tags"]);
+        $docs[$i]["tags"]=explode(",",trim($docs[$i]["Tags"]));
+        if($docs[$i]["tags"]==[""]) $docs[$i]["tags"]=[];
         unset($docs[$i]["Tags"]);
         unset($docs[$i]["Documenti collegati"]);
     }
@@ -300,6 +302,7 @@ function listEvents($pdo,$id=null){
         }
         if(count($ta)) $docs[$i]["links"]["to"]["documents"]=$ta;
         $docs[$i]["tags"]=explode(",",$docs[$i]["Tags"]);
+        if($docs[$i]["tags"]==[""]) $docs[$i]["tags"]=[];
         unset($docs[$i]["Tags"]);
         unset($docs[$i]["Documenti collegati"]);
     }
@@ -324,7 +327,8 @@ function listDomande($pdo,$id=null){
     for($i=0;$i<count($docs);$i++){
 $docs[$i]["ID"]=(int) $docs[$i]["ID"];
 $docs[$i]["UID"]="q".$docs[$i]["ID"];
-        $docs[$i]["tags"]=explode(",",$docs[$i]["Tags"]);
+        $docs[$i]["tags"]=explode(",",trim($docs[$i]["Tags"]));
+        if($docs[$i]["tags"]==[""]) $docs[$i]["tags"]=[];
         unset($docs[$i]["Tags"]);
 
         $ef=explode(",",$docs[$i]["Documenti collegati"]);
@@ -406,7 +410,7 @@ $docs[$i]["UID"]="f".$docs[$i]["ID"];
             $t=$pdo->prepare('SELECT * FROM "Eventi" WHERE DATETIME("NOW") >=  strftime("%s", "Data di pubblicazione") AND ID=:id ORDER BY "Data di pubblicazione" DESC');
             $t->execute([":id"=>$d]);
             $tu=$t->fetch(PDO::FETCH_ASSOC);
-            if($tu) $ta[]=["ID"=>(int)$d,"title"=>$tu["Titolo"],"UID"=>"q".$d];
+            if($tu) $ta[]=["ID"=>(int)$d,"title"=>$tu["Titolo"],"UID"=>"e".$d];
         }
         if(count($ta)) $docs[$i]["links"]["to"]["events"]=$ta;
         unset($docs[$i]["Eventi collegati"]);
@@ -434,7 +438,8 @@ $docs[$i]["UID"]="f".$docs[$i]["ID"];
         unset($docs[$i]["Contabilita collegata"]);
 
 
-        $docs[$i]["tags"]=explode(",",$docs[$i]["Tags"]);
+        $docs[$i]["tags"]=explode(",",trim($docs[$i]["Tags"]));
+        if($docs[$i]["tags"]==[""]) $docs[$i]["tags"]=[];
         unset($docs[$i]["Tags"]);
     }
     return $docs;

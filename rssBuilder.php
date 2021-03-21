@@ -17,10 +17,10 @@ function rss($a)
     <?php
         foreach($a as $e){
             echo "<item>";
-            echo "\n<title>".htmlentities($e["title"])."</title>\n";
-            echo "<description>".htmlentities($e["shortDescription"])."</description>\n";
-            echo "<link>https://www.innovationplaylist.eu/lens/app/api/view/UID/".htmlentities($e["UID"])."/render</link>\n";
-            echo "<pubDate>".htmlentities($e["publishedDate"])."</pubDate>";
+            echo "\n<title><![CDATA[".($e["title"])."]]></title>\n";
+            echo "<description><![CDATA[".($e["shortDescription"])."]]></description>\n";
+            echo "<link>https://www.innovationplaylist.eu/lens/app/api/view/UID/".($e["UID"])."/render</link>\n";
+            echo "<pubDate>".($e["publishedDate"])."</pubDate>";
             echo "</item>";
         }
     ?>
